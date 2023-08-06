@@ -3,7 +3,8 @@ TelCo project during internship.
 
 
 # CellCelly 
-![Project_Logo](https://github.com/BerkaySeyhun/CellCelly/assets/60739501/f30eb43c-505a-46af-a127-b315008b1052)
+
+![Project_Logo](https://github.com/BerkaySeyhun/CellCelly/assets/60739501/00427551-c46e-41a1-8e35-e82b7339854d)
 
 
 TelCo project during i2i 2023 internship.
