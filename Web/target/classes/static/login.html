@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CellCelly Online İşlemler</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+<div class="container">
+    <h1>Giriş Yap</h1>
+    <form id = "myForm" onsubmit="return submitForm()">
+        <label for="phone">Telefon Numarası:</label>
+        <input type="text" id="phone" name="phone" placeholder="Örnek: +905324443322" pattern="^\+905\d{9}$"
+               minlength="13" maxlength="13" required><br>
+
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" placeholder="Şifrenizi giriniz" minlength="8"
+               maxlength="32" required>
+        <span id="password-error" style="color: red; display: none; font-size: 12px;">
+            Şifreniz en az 8, en fazla 32 karakter uzunluğunda olmalı, büyük harf, küçük harf, rakam ve özel karakter içermelidir.</span><br>
+
+            <input type="submit" value="Giriş Yap"/>
+
+
+
+    </form>
+    <br>
+    <div class="otherButtons">
+        <a href="register.html">
+            <input id="registerButton" type="submit" value="Kayıt Ol"/>
+        </a><br>
+
+        <a
+                href="forgotten_password.html">
+            <input id="forgottenPasswordButton" type="submit" value="Şifremi Unuttum"/>
+        </a>
+    </div>
+
+</div>
+<script src="login.js"></script>
+</body>
+</html>
