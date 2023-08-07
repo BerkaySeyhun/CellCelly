@@ -75,7 +75,7 @@ CREATE SEQUENCE partition_id_sequence start with 1 increment by 1;
 ************************************************/
 
 INSERT INTO CUSTOMER(CUST_ID,MSISDN,NAME,SURNAME,EMAIL,PASSWORD,SDATE,STATUS,SECURITY_KEY)
-VALUES (CUST_ID_SEQUENCE.nextval,'5351234567','Burak','Celiloðlu','burak@nomail.com','123',SYSDATE,'A','._.');
+VALUES (CUST_ID_SEQUENCE.nextval,'5351234567','Burak','CeliloÃ°lu','burak@nomail.com','123',SYSDATE,'A','._.');
 INSERT INTO CUSTOMER(CUST_ID,MSISDN,NAME,SURNAME,EMAIL,PASSWORD,SDATE,STATUS,SECURITY_KEY)
 VALUES (CUST_ID_SEQUENCE.nextval,'5351234551','Ramo','Abc','ramoabc@nomail.com','456',SYSDATE,'A','mw');
 
@@ -326,6 +326,7 @@ END package_package;
 create or replace PACKAGE package_balance IS
     PROCEDURE get_balance(P_MSISDN IN CUSTOMER.MSISDN%TYPE, recordset OUT SYS_REFCURSOR);
     FUNCTION get_balance_id RETURN NUMBER;
+    FUNCTION get_partition_id RETURN NUMBER;
     PROCEDURE create_balance(S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,S_CUST_ID IN BALANCE.CUST_ID%TYPE,
                              P_PARTITION_ID IN BALANCE.PARTITION_ID%TYPE, v_package_id IN BALANCE.PACKAGE_ID%TYPE,
                              P_BAL_MONEY IN BALANCE.BAL_LVL_MONEY%TYPE);
@@ -338,7 +339,7 @@ create or replace PACKAGE BODY package_balance IS
             SELECT BAL.* FROM BALANCE BAL INNER JOIN CUSTOMER CUST ON BAL.CUST_ID = CUST.CUST_ID WHERE CUST.MSISDN = P_MSISDN;
             COMMIT;
         END;
-        
+
     FUNCTION get_balance_id RETURN NUMBER 
     AS
         u_id NUMBER;
@@ -347,7 +348,7 @@ create or replace PACKAGE BODY package_balance IS
         COMMIT;
     RETURN u_id ;
     END get_balance_id;    
-    
+
     FUNCTION get_partition_id RETURN NUMBER 
     AS
         u_id NUMBER;
@@ -356,7 +357,8 @@ create or replace PACKAGE BODY package_balance IS
         COMMIT;
     RETURN u_id ;
     END get_partition_id;    
-    
+
+
     PROCEDURE create_balance(S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,S_CUST_ID IN BALANCE.CUST_ID%TYPE,
                              P_PARTITION_ID IN BALANCE.PARTITION_ID%TYPE, v_package_id IN BALANCE.PACKAGE_ID%TYPE,
                              P_BAL_MONEY IN BALANCE.BAL_LVL_MONEY%TYPE) IS
