@@ -64,6 +64,10 @@ ALTER TABLE BALANCE ADD(
 
 CREATE SEQUENCE balance_id_sequence start with 1 increment by 1;
 
+ALTER TABLE BALANCE ADD BAL_LVL_MONEY NUMBER;
+
+CREATE SEQUENCE partition_id_sequence start with 1 increment by 1;
+
 /************************************************
 *                                               *
 *         ADDING DATA TO EXISTING TABLES        *
@@ -80,6 +84,8 @@ INSERT INTO BALANCE (balance_id,cust_id,package_id,bal_lvl_minutes, bal_lvl_sms,
 INSERT INTO BALANCE (balance_id,cust_id,package_id,bal_lvl_minutes, bal_lvl_sms, bal_lvl_data,sdate,edate) 
                VALUES(balance_id_sequence.nextval,166, 5, default, default, default, SYSDATE, SYSDATE);
                
+INSERT INTO PACKAGE (PACKAGE_ID, PACKAGE_NAME, PRICE, AMOUNT_MINUTES, AMOUNT_DATA, AMOUNT_SMS) VALUES (0,'WALLET',0,0,0,0);
+commit;
 INSERT INTO PACKAGE (PACKAGE_ID, PACKAGE_NAME, PRICE, AMOUNT_MINUTES, AMOUNT_DATA, AMOUNT_SMS, PERIOD) VALUES (package_id_sequence.nextval ,'ANKARA',50,3000,3,3000,30);
 commit;
 INSERT INTO PACKAGE (PACKAGE_ID, PACKAGE_NAME, PRICE, AMOUNT_MINUTES, AMOUNT_DATA, AMOUNT_SMS, PERIOD) VALUES (package_id_sequence.nextval ,'BURSA',65,5000,5,5000,30);
@@ -111,8 +117,8 @@ create or replace PACKAGE package_customer IS
     FUNCTION get_remaining_sms (p_msisdn customer.msisdn%type) RETURN NUMBER;
     FUNCTION forget_password(P_EMAIL IN CUSTOMER.EMAIL%TYPE, P_SECURITY_KEY IN CUSTOMER.SECURITY_KEY%TYPE) RETURN NVARCHAR2;
     PROCEDURE create_customer(S_CUST_ID IN CUSTOMER.CUST_ID%TYPE,S_MSISDN IN CUSTOMER.MSISDN%TYPE, S_NAME IN CUSTOMER.NAME%TYPE, S_SURNAME IN CUSTOMER.SURNAME%TYPE, 
-                                S_EMAIL IN CUSTOMER.EMAIL%TYPE, S_PASSWORD IN CUSTOMER.PASSWORD%TYPE,S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,
-                                P_SECURTY_KEY IN CUSTOMER.SECURITY_KEY%TYPE,P_PACKAGE_ID IN PACKAGE.PACKAGE_ID%TYPE);
+                                S_EMAIL IN CUSTOMER.EMAIL%TYPE, S_PASSWORD IN CUSTOMER.PASSWORD%TYPE,
+                                P_SECURTY_KEY IN CUSTOMER.SECURITY_KEY%TYPE);
 
 END package_customer;
 
@@ -207,20 +213,11 @@ create or replace PACKAGE BODY package_customer IS
     END; 
 
     PROCEDURE create_customer(S_CUST_ID IN CUSTOMER.CUST_ID%TYPE,S_MSISDN IN CUSTOMER.MSISDN%TYPE, S_NAME IN CUSTOMER.NAME%TYPE, S_SURNAME IN CUSTOMER.SURNAME%TYPE, 
-                                S_EMAIL IN CUSTOMER.EMAIL%TYPE, S_PASSWORD IN CUSTOMER.PASSWORD%TYPE,S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,
-                                P_SECURTY_KEY IN CUSTOMER.SECURITY_KEY%TYPE,P_PACKAGE_ID IN PACKAGE.PACKAGE_ID%TYPE) AS
-        v_package_id number;
-        v_package_name nvarchar2(200);
+                                S_EMAIL IN CUSTOMER.EMAIL%TYPE, S_PASSWORD IN CUSTOMER.PASSWORD%TYPE,
+                                P_SECURTY_KEY IN CUSTOMER.SECURITY_KEY%TYPE) IS
         BEGIN
-
-        SELECT package.package_id, package.package_name INTO v_package_id, v_package_name FROM package where package.package_id =  P_PACKAGE_ID; 
-
             INSERT INTO CUSTOMER (cust_id,msisdn,name,surname,email,password,sdate,status,security_key) 
                VALUES(S_CUST_ID,s_msisdn,s_name,s_surname,s_email,s_password,SYSDATE,default,P_SECURTY_KEY);
-            COMMIT;
-            INSERT INTO BALANCE (balance_id,cust_id,package_id,bal_lvl_minutes, bal_lvl_sms, bal_lvl_data,sdate,edate) 
-               VALUES(S_BALANCE_ID,S_CUST_ID, v_package_id, default, default, default, SYSDATE, SYSDATE);
-
             COMMIT;
         END;
 END package_customer;
@@ -289,6 +286,9 @@ create or replace PACKAGE PACKAGE_PACKAGE IS
     PROCEDURE get_all_packages(recordset OUT SYS_REFCURSOR);
     PROCEDURE insert_package(P_PACKAGE_NAME IN PACKAGE.PACKAGE_NAME%TYPE, P_AMOUNT_MINUTES IN PACKAGE.AMOUNT_MINUTES%TYPE, P_AMOUNT_DATA IN PACKAGE.AMOUNT_DATA%TYPE, 
                             P_AMOUNT_SMS IN PACKAGE.AMOUNT_SMS%TYPE, P_PERIOD IN PACKAGE.PERIOD%TYPE);
+    PROCEDURE create_package(P_PACKAGE_ID IN PACKAGE.PACKAGE_ID%TYPE,P_PACKAGE_NAME IN PACKAGE.PACKAGE_NAME%TYPE,P_PRICE IN PACKAGE.PRICE%TYPE
+                            P_AMOUNT_MINUTES IN PACKAGE.AMOUNT_MINUTES%TYPE,P_AMOUNT_DATA IN PACKAGE.AMOUNT_DATA%TYPE,
+                            P_AMOUNT_SMS IN PACKAGE.AMOUNT_SMS%TYPE,P_PERIOD IN PACKAGE.PERIOD%TYPE);
 END package_package;
 
 create or replace PACKAGE BODY PACKAGE_PACKAGE IS
@@ -302,10 +302,20 @@ create or replace PACKAGE BODY PACKAGE_PACKAGE IS
                             P_AMOUNT_SMS IN PACKAGE.AMOUNT_SMS%TYPE, P_PERIOD IN PACKAGE.PERIOD%TYPE) IS
         BEGIN
             INSERT INTO PACKAGE (PACKAGE_ID,PACKAGE_NAME,AMOUNT_MINUTES,AMOUNT_DATA,AMOUNT_SMS,PERIOD) 
-                    VALUES (PACKAGE_ID_SEQUENCE.NEXTVAL, P_PACKAGE_NAME, P_AMOUNT_MINUTES, P_AMOUNT_DATA * 1024, P_AMOUNT_SMS, P_PERIOD);
+                    VALUES (P_PACKAGE_ID, P_PACKAGE_NAME, P_AMOUNT_MINUTES, P_AMOUNT_DATA * 1024, P_AMOUNT_SMS, P_PERIOD);
+            COMMIT;
+        END;
+        
+    PROCEDURE create_package(P_PACKAGE_ID IN PACKAGE.PACKAGE_ID%TYPE,P_PACKAGE_NAME IN PACKAGE.PACKAGE_NAME%TYPE,P_PRICE IN PACKAGE.PRICE%TYPE
+                            P_AMOUNT_MINUTES IN PACKAGE.AMOUNT_MINUTES%TYPE,P_AMOUNT_DATA IN PACKAGE.AMOUNT_DATA%TYPE,
+                            P_AMOUNT_SMS IN PACKAGE.AMOUNT_SMS%TYPE,P_PERIOD IN PACKAGE.PERIOD%TYPE) IS
+        BEGIN
+            INSERT INTO PACKAGE (package_id,package_name,price,amount_minutes,amount_data,amount_sms,period) 
+               VALUES(P_PACKAGE_ID,P_PACKAGE_NAME,P_PRICE,P_AMOUNT_MINUTES,P_AMOUNT_DATA,P_AMOUNT_SMS,P_PERIOD);
             COMMIT;
         END;
 END package_package;
+    
 
 /************************************************
 *                                               *
@@ -316,6 +326,9 @@ END package_package;
 create or replace PACKAGE package_balance IS
     PROCEDURE get_balance(P_MSISDN IN CUSTOMER.MSISDN%TYPE, recordset OUT SYS_REFCURSOR);
     FUNCTION get_balance_id RETURN NUMBER;
+    PROCEDURE create_balance(S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,S_CUST_ID IN BALANCE.CUST_ID%TYPE,
+                             P_PARTITION_ID IN BALANCE.PARTITION_ID%TYPE, v_package_id IN BALANCE.PACKAGE_ID%TYPE,
+                             P_BAL_MONEY IN BALANCE.BAL_LVL_MONEY%TYPE);
 END package_balance;
 
 create or replace PACKAGE BODY package_balance IS
@@ -335,4 +348,23 @@ create or replace PACKAGE BODY package_balance IS
     RETURN u_id ;
     END get_balance_id;    
     
+    FUNCTION get_partition_id RETURN NUMBER 
+    AS
+        u_id NUMBER;
+    BEGIN 
+        u_id := PARTITION_ID_SEQUENCE.nextval;
+        COMMIT;
+    RETURN u_id ;
+    END get_partition_id;    
+    
+    PROCEDURE create_balance(S_BALANCE_ID IN BALANCE.BALANCE_ID%TYPE,S_CUST_ID IN BALANCE.CUST_ID%TYPE,
+                             P_PARTITION_ID IN BALANCE.PARTITION_ID%TYPE, v_package_id IN BALANCE.PACKAGE_ID%TYPE,
+                             P_BAL_MONEY IN BALANCE.BAL_LVL_MONEY%TYPE) IS
+        BEGIN 
+            INSERT INTO BALANCE (balance_id,package_id,cust_id,partition_id,bal_lvl_minutes, bal_lvl_sms, bal_lvl_data,sdate,edate) 
+               VALUES(S_BALANCE_ID,v_package_id,S_CUST_ID,P_PARTITION_ID, default, default, default, SYSDATE, SYSDATE);
+            COMMIT;
+        END;  
 END package_balance;
+
+commit;
