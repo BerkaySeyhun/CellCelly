@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CellCelly Online İşlemler</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+<div class="container">
+    <h1>Kayıt Ol</h1>
+    <form onsubmit="return submitForm()">
+        <label for="fname">İsim:</label>
+        <input type="text" id="fname" name="fname" placeholder="İsminizi giriniz"
+               pattern="^[a-zA-ZğüşıöçĞÜŞİÖÇ]+(?: [a-zA-ZğüşıöçĞÜŞİÖÇ]+)?$" minlength="2"; maxlength="50"; autocomplete="on" required>
+
+        <label for="lname">Soyisim:</label>
+        <input type="text" id="lname" name="lname" placeholder="Soyisminizi giriniz" minlength="2"; maxlength="50";
+               pattern="^[a-zA-ZğüşıöçĞÜŞİÖÇ]+(?: [a-zA-ZğüşıöçĞÜŞİÖÇ]+)?$" autocomplete="on" required>
+
+        <label for="phone">Telefon Numarası:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Telefon numaranızı giriniz"
+               pattern="^5[0-9]{9}$" minlength="10"; maxlength="10"; autocomplete="on" required>
+
+        <label for="password">Şifre:</label>
+        <input type="password" id="password" name="password" placeholder="Şifrenizi giriniz"
+               pattern="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$" minlength="8"; autocomplete="on" required>
+        <span id="password-error" style=" color: red; display: none; font-size: 10px; ">Şifreniz en az 8 karakter uzunluğunda, büyük harf, küçük harf, rakam ve özel karakter içermelidir.</span>
+
+        <label for="email">E-posta:</label>
+        <input type="email" id="email" name="email" placeholder="E-postanızı giriniz"
+               pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(?:com)$" minlength="7"; maxlength="255" autocomplete="on" required>
+        <span id="email-error"
+              style="color: red; display: none; font-size: 12px;">Geçerli bir e-posta adresi giriniz.</span>
+
+        <label for="securityKey">Güvenlik Anahtarı:</label>
+        <input type="text" id="securityKey" name="securityKey" placeholder="Güvenlik anahtarınızı giriniz"
+               minlength="1"; autocomplete="on" required>
+
+        <label for="package">Paket:</label>
+        <select id="package" name="paket">
+            <option value="paket0">Paket Seçiniz</option>
+            <option value="paket1">DİYARBAKIR (7000 DK- 7 GB - 7000 SMS) [80₺] </option>
+            <option value="paket2">RİZE       (10000 DK- 10 GB - 10000 SMS) [95₺]</option>
+            <option value="paket3">ÇANAKKALE  (1700 DK- 17 GB - 700 SMS) [120₺]</option>
+            <option value="paket4">ESKİŞEHİR  (1000 DK- 20 GB - 5000 SMS) [140₺]</option>
+            <option value="paket5">ANKARA     (3000 DK- 3 GB - 3000 SMS) [50₺]</option>
+            <option value="paket6">BURSA      (5000 DK- 5 GB - 5000 SMS) [65₺]</option>
+        </select> <br>
+
+        <input type="submit" value="Kayıt Ol" onclick="submitForm()">
+    </form>
+</div>
+<script src="register.js"></script>
+</body>
+</html>
