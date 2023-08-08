@@ -232,6 +232,7 @@ create or replace PACKAGE PACKAGE_DMLOPERATIONS IS
     PROCEDURE update_minutes(p_cust_id in customer.cust_id%type, p_msisdn in customer.msisdn%type, amount in number);
     PROCEDURE update_data(p_cust_id in customer.cust_id%type, p_msisdn in customer.msisdn%type, amount in number);
     PROCEDURE update_sms(p_cust_id in customer.cust_id%type, p_msisdn in customer.msisdn%type, amount in number);
+    PROCEDURE update_lvl_money(p_cust_id in customer.cust_id%type, p_msisdn in customer.msisdn%type, p_package_id in package.package_id%type ,amount in number);
 END PACKAGE_DMLOPERATIONS;
 
 create or replace PACKAGE BODY PACKAGE_DMLOPERATIONS IS 
@@ -270,10 +271,22 @@ PROCEDURE update_minutes(p_cust_id in customer.cust_id%type, p_msisdn in custome
             )s
             ON (b.CUST_ID = s.CUST_ID)
         WHEN MATCHED THEN
-        UPDATE SET b.bal_lvl_sms = b.bal_lvl_sms + amount ;
+        UPDATE SET b.bal_lvl_sms = b.bal_lvl_sms + amount;
         COMMIT;
     END;
     
+    PROCEDURE update_lvl_money(p_cust_id in customer.cust_id%type, p_msisdn in customer.msisdn%type, p_package_id in package.package_id%type ,amount in number) IS
+    BEGIN
+    COMMIT;
+        MERGE INTO BALANCE b
+            USING (
+                SELECT CUST_ID FROM CUSTOMER WHERE MSISDN = p_msisdn AND cust_id = p_cust_id
+            )s
+            ON (b.CUST_ID = s.CUST_ID)
+        WHEN MATCHED THEN
+        UPDATE SET b.bal_lvl_money = b.bal_lvl_money - amount;
+        COMMIT;
+    END;
 END PACKAGE_DMLOPERATIONS;
 
 /************************************************
@@ -363,8 +376,8 @@ create or replace PACKAGE BODY package_balance IS
                              P_PARTITION_ID IN BALANCE.PARTITION_ID%TYPE, v_package_id IN BALANCE.PACKAGE_ID%TYPE,
                              P_BAL_MONEY IN BALANCE.BAL_LVL_MONEY%TYPE) IS
         BEGIN 
-            INSERT INTO BALANCE (balance_id,package_id,cust_id,partition_id,bal_lvl_minutes, bal_lvl_sms, bal_lvl_data,sdate,edate) 
-               VALUES(S_BALANCE_ID,v_package_id,S_CUST_ID,P_PARTITION_ID, default, default, default, SYSDATE, SYSDATE);
+            INSERT INTO BALANCE (balance_id,package_id,cust_id,partition_id,bal_lvl_minutes, bal_lvl_sms, bal_lvl_data,sdate,edate,bal_lvl_money) 
+               VALUES(S_BALANCE_ID,v_package_id,S_CUST_ID,P_PARTITION_ID, default, default, default, SYSDATE, SYSDATE,P_BAL_MONEY);
             COMMIT;
         END;  
 END package_balance;
