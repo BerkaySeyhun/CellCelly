@@ -32,7 +32,7 @@ public class SubscriberMessageFactory {
                     subsMessage.setUsageAmount((Long) attributes.get("dataUsage"));
                     subsMessage.setRatingNumber((Long) attributes.get("rGroup"));
                 }
-                case "sms" -> subsMessage.setSenderMSISDN((String) attributes.get("bMsisdn"));
+                case "sms" -> subsMessage.setReceiverMSISDN((String) attributes.get("bMsisdn"));
                 case "voice" -> {
                     subsMessage.setUsageAmount((Long) attributes.get("dataUsage"));
                     subsMessage.setReceiverMSISDN((String) attributes.get("bMsisdn"));

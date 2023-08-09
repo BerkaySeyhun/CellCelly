@@ -38,8 +38,8 @@ public class SubscriberService implements ISubscriberService{
         DGWLogger.printInfoLogs("Generating new message in business layer");
         SubscriberMessage subsMessage = SubscriberMessageFactory.create(message);
 
-        //partitionKey = subscriberDal.getPartitionIDFromMSISDN();
-        //subsMessage.set_partitionKey(partitionKey);
+        partitionKey = Integer.parseInt(subscriberDal.getPartitionIDFromMSISDN(subsMessage.getSenderMSISDN()));
+        subsMessage.set_partitionKey(partitionKey);
 
         DGWLogger.printInfoLogs("Message created in business layer");
         return subsMessage;
