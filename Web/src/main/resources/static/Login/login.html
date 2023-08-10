@@ -2,38 +2,36 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CellCelly Online İşlemler</title>
+    <title>CellCelly Online</title>
     <link rel="stylesheet" href="login.css">
 </head>
-<!--onsubmit="return submitForm()"-->
 <body>
 <div class="container">
-    <img class="imagePart" src="../CellCelly%20Logo.jpg">
-    <br>
-    <h1>Giriş Yap</h1>
+    <img class="imagePart" src="../CellCelly Logo.jpeg"> <br><br>
     <form id="myForm">
-        <label for="phone">Telefon Numarası:</label>
-        <input type="text" id="phone" name="phone" placeholder="Örnek: 5324443322" pattern="^5[0-9]{9}$"
-               minlength="10" maxlength="10" required><br>
-        <label for="password">Şifre:</label>
-        <input type="password" id="password" name="password" placeholder="Şifrenizi giriniz" minlength="8"
-               maxlength="32" required>
-        <span id="password-error" style="color: red; display: none; font-size: 12px;">
-            Şifreniz en az 8, en fazla 32 karakter uzunluğunda olmalı, büyük harf, küçük harf, rakam ve özel karakter içermelidir.</span>
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" placeholder="Sample: 5004443322" pattern="^5[0-9]{9}$"
+               minlength="10" maxlength="10" required>
+        <span id="phone-error">Your phone number must be in the format 5xx-xxx-xxxx and 10 digits.</span>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password"
+               minlength="8" maxlength="32" required>
+        <span id="password-error" dispka>Your password must be at least 8 characters long and include uppercase, lowercase, digits, and special characters.</span>
         <div>
-            <input type="checkbox" value="Beni Hatırla" id="rememberMe">
-            <label for="rememberMe">Beni Hatırla</label>
+            <input type="checkbox" value="Remember me" id="rememberMe">
+            <label for="rememberMe">Remember me</label>
         </div>
         <br>
-        <input id="submitButton" type="submit" value="Giriş Yap" onclick="lsRememberMe(), submitForm()"/>
+        <input id="submitButton" type="button" value="Log in" onclick="listenRememberMe();"/>
     </form>
     <br>
     <div class="otherButtons">
         <a href="../Register/register.html">
-            <input class="button" id="registerButton" type="submit" value="Kayıt Ol"/>
+            <input class="button" id="registerButton" type="button" value="Sign Up"/>
         </a><br>
         <a href="../ForgottenPassword/forgotten_password.html">
-            <input class="button" id="forgottenPasswordButton" type="submit" value="Şifremi Unuttum"/>
+            <input class="button" id="forgottenPasswordButton" type="button" value="Forgot password"/>
         </a>
     </div>
 </div>

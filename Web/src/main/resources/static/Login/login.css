@@ -26,7 +26,7 @@ div.container {
     justify-content: center;
     align-items: center; /* Center the content vertically */
     height: 200px;
-    border-radius: 5px;
+    border-radius: 20px;
     margin: 0 auto;
     padding: 0;
 }
@@ -56,7 +56,8 @@ input[type="password"] {
     outline: none;
 }
 
-input[type="submit"] {
+
+input[type="button"] {
     padding: 10px;
     background-color: #428bde;
     color: #ffffff;
@@ -87,6 +88,11 @@ input[type="submit"] {
 
 }
 
+span{
+    color: red;
+    display: none;
+    font-size: 12px;
+}
 /*input[type="submit"]:hover {*/
 /*    background-color: #004c99;*/
 /*}*/
