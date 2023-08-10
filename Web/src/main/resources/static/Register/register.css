@@ -17,14 +17,14 @@ div {
     max-width: 400px;
     margin: 0 auto; /* Add margin-top to move the container up */
     padding: 20px;
-    background-color: #f5efef;
+    background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
     text-align: center;
-    color: #0066cc;
+    color: #428bde;
     margin-bottom: 20px;
 }
 
@@ -36,7 +36,7 @@ form {
 label {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #0066cc;
+    color: #428bde;
 }
 
 input[type="text"],
@@ -52,7 +52,7 @@ input[type="password"] {
 
 input[type="submit"] {
     padding: 10px;
-    background-color: #0066cc;
+    background-color: #428bde;
     color: #ffffff;
     border: none;
     border-radius: 3px;
@@ -61,15 +61,26 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #004c99;
+    background-color: #428bde;
 }
 
 input[type="submit"]:focus {
     outline: none;
 }
 
-select {
+input[type="button"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #428bde;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
+select {
+    font-family: Arial, sans-serif;
     width: 100%;
     padding: 2.3%;
     font-size: 14px;
@@ -78,7 +89,12 @@ select {
 }
 
 option {
-
     background-color: #f5efef;
     color: #333;
+}
+
+span{
+    color: red;
+    display: none;
+    font-size: 12px;
 }
