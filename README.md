@@ -17,11 +17,11 @@ Here is a table of the project
 | Burak Celiloğlu       | Oracle DB                         |
 | Emre Efe              | Test1 (OCS, DGW, SF, Kafka)       |
 | Sena Akdoğan          | IVR-SMS                           |  
-| Arda Adayener         | Test3 (IOS, Android, Web          |
+| Arda Adayener         | Test3 (IOS, Android, Web)         |
 | Ali Enes Doğan        | IOS                               |
 | Elifnur Kabalcı       | Android                           |
-| Hatice Sudenas Çapacı | Voltdb                            |
-| Aslıhan Altun         | Test2 (MW, Voltdb, Hazelcast)     |
+| Hatice Sudenas Çapacı | VoltDB                            |
+| Aslıhan Altun         | Test2 (MW, VoltDB, Hazelcast)     |
 | Ahmet Usta            | SF                                |
 | Ramazan Fırat Akdağ   | MW                                |
 | Okan Çezik            | Hazelcast                         |
