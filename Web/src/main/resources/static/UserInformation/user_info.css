@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.charts {
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    color: #428bde;
+}
+
+strong {
+    color: #428bde;
+}
+
+div {
+    background-color: #ffffff;
+}
+
+div.container {
+    max-width: 600px;
+    max-height: 100%;
+    background-color: #ffffff;
+
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.textPartOfChart {
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+}
+
+input[type="button"] {
+    padding: 10px;
+    background-color: #428bde;
+    color: #ffffff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buttons {
+    display: flex;
+    column-gap: 10px;
+    justify-content: center;
+}

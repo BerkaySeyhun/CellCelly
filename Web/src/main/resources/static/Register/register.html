@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CellCelly Online</title>
+    <link href="register.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>Register</h1>
+    <form>
+        <label for="fname">First Name:</label>
+        <input autocomplete="on" id="fname" maxlength="50" minlength="2"
+               name="fname" pattern="^[a-zA-ZğüşıöçĞÜŞİÖÇ]+(?: [a-zA-ZğüşıöçĞÜŞİÖÇ]+)?$"
+               placeholder="Enter your first name"
+               required type="text">
+        <span id="fname-error">Your first name must consist of letters only.</span>
+
+        <label for="lname">Last Name:</label>
+        <input autocomplete="on" id="lname" maxlength="50" minlength="2" name="lname"
+               pattern="^[a-zA-ZğüşıöçĞÜŞİÖÇ]+(?: [a-zA-ZğüşıöçĞÜŞİÖÇ]+)?$"
+               placeholder="Enter your last name" required type="text">
+        <span id="lname-error">Your last name must consist of letters only.</span>
+        <label for="phone">Phone Number:</label>
+        <input autocomplete="on" id="phone" maxlength="10" minlength="10"
+               name="phone" pattern="^5[0-9]{9}$" placeholder="Enter your phone number" required type="tel">
+        <span id="phone-error">Your phone number must be in the format 5xx-xxx-xxxx and have 10 digits.</span>
+
+        <label for="password">Password:</label>
+        <input autocomplete="on" id="password" maxlength="32" minlength="8"
+               name="password" pattern="^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$" placeholder="Enter your password" required
+               type="password">
+        <span id="password-error">Your password must be at least 8 characters long and include uppercase, lowercase, digits, and special characters.</span>
+
+        <label for="email">E-mail:</label>
+        <input autocomplete="on" id="email" maxlength="255" minlength="7"
+               name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(?:com)$" placeholder="Enter your email address"
+               required
+               type="email">
+        <span id="email-error">Please enter a valid email address.</span>
+
+        <label for="securityKey">Security Key:</label>
+        <input autocomplete="on" id="securityKey" maxlength="6" minlength="6"
+               name="securityKey" placeholder="Enter your security key" required type="text">
+        <span id="securityKey-error">Your security key must consist of digits and be 6 digits long.</span>
+        <label for="package">Package:</label>
+        <select id="package" name="package">
+            <option value="1">ANKARA (3000 MINS- 3 GB - 3000 SMS) [50₺]</option>
+            <option value="2">BURSA (5000 MINS- 5 GB - 5000 SMS) [65₺]</option>
+            <option value="3">DİYARBAKIR (7000 MINS- 7 GB - 7000 SMS) [80₺]</option>
+            <option value="4">RİZE (10000 MINS- 10 GB - 10000 SMS) [95₺]</option>
+            <option value="5">ÇANAKKALE (1700 MINS- 17 GB - 700 SMS) [120₺]</option>
+            <option value="6">ESKİŞEHİR (1000 MINS- 20 GB - 5000 SMS) [140₺]</option>
+        </select> <br>
+
+        <input id="registerButton" type="button" value="Register"> <br>
+        <input id="exitButton" type="button" value="Exit">
+    </form>
+</div>
+<script src="register.js"></script>
+</body>
+</html>

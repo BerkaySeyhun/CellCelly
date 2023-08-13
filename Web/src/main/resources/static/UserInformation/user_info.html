@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>User Package Information</title>
+    <link href="user_info.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container">
+    <h1>User Package Information</h1>
+    <br><br>
+    <div class="mainInfo">
+        <p><strong><span id="userName"></span></strong></p>
+        <p><strong>Phone Number:</strong> <span id="phoneNumber"></span></p> <br>
+        <p><strong>Package Name:</strong> <span id="packageName"></span></p> <br>
+        <p><strong>Due Time:</strong> <span id="dueTime"></span></p>
+    </div>
+    <br> <br>
+    <div class="charts">
+        <div class="data-container" data-type="MB" id="dataChart">
+            <svg height="180" version="1.1" width="180" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="90" cy="90" fill="#dee3ed" r="80" stroke="#048a95" stroke-width="4"/>
+            </svg>
+            <div class="textPartOfChart">
+                <p><strong>Internet:</strong> <span id="internet"></span></p>
+                <p><strong>Total Internet:</strong> <span id="totalInternet"></span></p>
+            </div>
+        </div>
+        <div class="textPartOfChart" data-type="SMS" id="smsChart">
+            <svg height="180" version="1.1" width="180" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="90" cy="90" fill="#dee3ed" r="80" stroke="#048a95" stroke-width="4"/>
+            </svg>
+            <div class="sms">
+                <p><strong>SMS:</strong> <span id="sms"></span></p>
+                <p><strong>Total SMS:</strong> <span id="totalSms"></span></p>
+            </div>
+        </div>
+        <div class="textPartOfChart" data-type="MIN" id="voiceChart">
+            <svg height="180" version="1.1" width="180" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="90" cy="90" fill="#dee3ed" r="80" stroke="#048a95" stroke-width="4"/>
+            </svg>
+            <div class="minutes">
+                <p><strong>Minutes:</strong> <span id="voice"></span></p>
+                <p><strong>Total Voice:</strong> <span id="totalVoice"></span></p>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <br>
+    <div class="buttons">
+        <input id="changePasswordButton" type="button" value="Change Password"> <br><br>
+        <input id="exitButton" type="button" value="Exit">
+    </div>
+</div>
+<script src="user_info.js" type="module"></script>
+
+
+</body>
+</html>
