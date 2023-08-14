@@ -6,12 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="DGW" />
+        <module name="CelcelliWebDemo" />
+        <module name="CellCelly" />
+        <module name="kafka" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="DGW" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="CelcelliWebDemo" options="-parameters" />
       <module name="DGW" options="-parameters" />
     </option>
   </component>

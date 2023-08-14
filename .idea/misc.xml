@@ -5,6 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/DGW/pom.xml" />
+        <option value="$PROJECT_DIR$/Web/pom.xml" />
+        <option value="$PROJECT_DIR$/Kafka/pom.xml" />
+        <option value="$PROJECT_DIR$/Sms-System/pom.xml" />
       </list>
     </option>
   </component>
