@@ -1,5 +1,4 @@
 # CellCelly 
-TelCo project during internship.
 
 ![Project_Logo](https://github.com/BerkaySeyhun/CellCelly/assets/60739501/00427551-c46e-41a1-8e35-e82b7339854d)
 
