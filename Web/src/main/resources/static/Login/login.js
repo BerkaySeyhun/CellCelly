@@ -1,39 +1,3 @@
-const phoneInput = document.getElementById('phone');
-const phonePattern = /^5[0-9]{9}$/;
-const phoneError = document.getElementById('phone-error');
-const submitButton = document.getElementById('submitButton');
-const passwordInput = document.getElementById('password');
-const passwordError = document.getElementById("password-error");
-
-{
-    const rmCheck = document.getElementById("rememberMe");
-    if (localStorage.checkbox && localStorage.checkbox !== "") {
-        rmCheck.setAttribute("checked", "checked");
-        // phoneInput.value = localStorage.username;
-    } else {
-        rmCheck.removeAttribute("checked");
-        // phoneInput.value = "";
-    }
-    if (localStorage.username) {
-        phoneInput.value = localStorage.username;
-    } else {
-        phoneInput.value = "";
-    }
-    rmCheck.addEventListener('change', function () {
-        listenRememberMe();
-    });
-
-    function listenRememberMe() {
-        if (rmCheck.checked && phoneInput.value !== "") {
-            localStorage.username = phoneInput.value;
-            localStorage.checkbox = rmCheck.checked;
-        } else {
-            localStorage.username = "";
-            localStorage.checkbox = "";
-        }
-    }
-}// Remember me.
-
 function validate(inputElement, pattern, errorElement) {
     const isValid = pattern.test(inputElement.value);
     if (!isValid && inputElement.value !== '') {
@@ -44,50 +8,80 @@ function validate(inputElement, pattern, errorElement) {
     return isValid;
 }
 
-submitButton.addEventListener("click", async function (event) {
-    const isPhoneValid = validate(phoneInput, phonePattern, phoneError);
-    if (isPhoneValid && passwordInput.value !== '') {
-        passwordError.style.display = 'none';
-        try {
-            const response = await fetch(`http://35.194.5.106:8080/api/customer/login/${phoneInput.value}/${passwordInput.value}`, {
-                method: "GET"
-            });
-            if (response.ok) {
-                // Display success message
-                alert("BaÅŸarÄ±yla giriÅŸ yaptÄ±nÄ±z!");
-                // Wait for 2 seconds and redirect
-                setTimeout(function () {
-                    window.location.href = "../UserInformation/user_info.html";
-                }, 800);
-            } else {
-                // Display error message
-                alert("GiriÅŸ bilgilerinizi kontrol ederek tekrar deneyiniz.");
-            }
-        } catch (error) {
-            console.error("An error occurred:", error);
-        }
-    }else{
-        passwordError.style.display = 'block';
-    }
+const phoneInputUnique = document.getElementById('phone');
+const phonePattern = /^5[0-9]{9}$/;
+const phoneError = document.getElementById('phone-error');
+const submitButton = document.getElementById('submitButton');
+const passwordInput = document.getElementById('password');
+const passwordError = document.getElementById("password-error");
+
+const rmCheck = document.getElementById("rememberMe");
+if (localStorage.checkbox && localStorage.checkbox !== "") {
+    rmCheck.setAttribute("checked", "checked");
+} else {
+    rmCheck.removeAttribute("checked");
+}
+if (localStorage.username) {
+    phoneInputUnique.value = localStorage.username;
+} else {
+    phoneInputUnique.value = "";
+}
+rmCheck.addEventListener('change', function () {
+    listenRememberMe();
 });
-// http://35.194.5.106:8080/api/customer/login/5051937182/1234abcD.
 
+function listenRememberMe() {
+    if (rmCheck.checked && phoneInputUnique.value !== "") {
+        localStorage.username = phoneInputUnique.value;
+        localStorage.checkbox = rmCheck.checked;
+    } else {
+        localStorage.username = "";
+        localStorage.checkbox = "";
+    }
+}
 
-phoneInput.addEventListener("change", function (event) {
-    const isPhoneValid = phonePattern.test(phoneInput.value);
+phoneInputUnique.addEventListener("change", function (event) {
+    const isPhoneValid = phonePattern.test(phoneInputUnique.value);
     if (isPhoneValid !== true) {
         phoneError.style.display = 'block';
     } else {
+        localStorage.setItem("phoneInputValue", phoneInputUnique.value);
         phoneError.style.display = 'none';
     }
 });
-// passwordInput.addEventListener("change", function (event) {
-//     if (passwordInput.value !== '') {
-//         passwordError.style.display = 'block';
-//     } else {
-//         passwordError.style.display = 'none';
-//     }
-// });
+
+submitButton.addEventListener("click", async function (event) {
+
+    const isPhoneValid = validate(phoneInputUnique, phonePattern, phoneError);
+    if (isPhoneValid && passwordInput.value !== '') {
+        passwordError.style.display = 'none';
+        window.location.href = "../UserInformation/user_info.html";
+        try {
+            const response = await fetch(`http://35.194.5.106:8080/api/customer/login/${phoneInputUnique.value}/${passwordInput.value}`, {
+                method: "GET"
+            });
+            if (response.ok) {
+                // Wait for 2 seconds and redirect
+                setTimeout(function () {
+                    window.location.href = "../UserInformation/user_info.html";
+                }, 0);
+            } else {
+                // Display error message
+                alert("Please check your entrances and try again. ");
+            }
+        } catch (error) {
+            alert("An error occured ,please check your entrances and try again. ");
+            console.error("An error occurred:", error);
+        }
+    } else {
+        passwordError.style.display = 'block';
+    }
+});
+
+
+
+
+
 
 
 

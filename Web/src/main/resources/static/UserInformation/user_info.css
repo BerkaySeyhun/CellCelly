@@ -7,79 +7,43 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
-}
-
-.container div {
-    max-width: 400px;
-    max-height: 105px;
-    margin: 0 auto; /* Add margin-top to move the container up */
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/*body {*/
-/*    font-family: Arial, sans-serif;*/
-/*    background-color: #f2f2f2;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    !*height: 70vh;*!*/
-/*    margin: 0;*/
-/*}*/
-
-.header {
+    display: flex;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-/*.container {*/
-/*    display: flex;*/
-/*    justify-content: space-around;*/
-/*}*/
-
-.column {
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex: 1;
-}
-
-.fatura {
-    text-align: center;
-    /*margin: 20px;*/
-    /*background-color: #ffffff;*/
-    /*border-radius: 5px;*/
-    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
-    /*padding: 10px;*/
-    max-width: 400px;
-    margin: 0 auto; /* Add margin-top to move the container up */
-    /*padding: 20px;*/
-    background-color: #ffffff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.charts {
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
     color: #428bde;
-    margin-bottom: 10px;
 }
 
-h3 {
+strong {
     color: #428bde;
-    margin-bottom: 10px;
 }
 
-p {
-    margin: 0px auto;
+div {
+    background-color: #ffffff;
+}
+
+div.container {
+    max-width: 600px;
+    max-height: 100%;
+    background-color: #ffffff;
+
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.textPartOfChart {
+    grid-template-columns: auto auto;
+    column-gap: 10px;
 }
 
 input[type="button"] {
-    width: 45%;
     padding: 10px;
     background-color: #428bde;
     color: #ffffff;
@@ -91,15 +55,6 @@ input[type="button"] {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
-    margin-right: 10px;
-
-}
-
-button:hover {
-    background-color: #428bde;
-}
-
-button:focus {
-    outline: none;
+    column-gap: 10px;
+    justify-content: center;
 }

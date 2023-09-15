@@ -24,7 +24,7 @@ function submitForm() {
     if (passwordInput !== passwordClone.value) {
         passwordMatchError.style.display = 'block';
         return false;
-    }else if (!passwordPatternIsTrue) {
+    } else if (!passwordPatternIsTrue) {
         passwordError.style.display = 'block';
         return false;
     } else {

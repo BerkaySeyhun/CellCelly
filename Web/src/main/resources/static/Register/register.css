@@ -7,7 +7,6 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
-    /*display: flex;*/
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -15,7 +14,7 @@ body {
 
 div {
     max-width: 400px;
-    margin: 0 auto; /* Add margin-top to move the container up */
+    margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 5px;
@@ -93,7 +92,7 @@ option {
     color: #333;
 }
 
-span{
+span {
     color: red;
     display: none;
     font-size: 12px;

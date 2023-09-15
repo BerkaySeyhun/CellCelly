@@ -69,7 +69,7 @@ registerButton.addEventListener("click", function () {
     let checkEmailValid = validate(emailInput, emailPattern, emailError);
     let checkSecurityKeyValid = validate(securitKeyInput, securityKeyPattern, securityKeyError);
 
-    if (checkLnameValid && checkFnameValid && checkPhoneValid && checkPasswordValid && checkEmailValid && checkSecurityKeyValid ) {
+    if (checkLnameValid && checkFnameValid && checkPhoneValid && checkPasswordValid && checkEmailValid && checkSecurityKeyValid) {
         const myVar = {
             "PACKAGE_ID": packageInput.value,
             "MSISDN": phoneInput.value,
@@ -88,11 +88,12 @@ registerButton.addEventListener("click", function () {
             body: JSON.stringify(myVar)
         })
             .then((data) => {
-                console.log(data.statusText); // Gönderilen myVar değerlerinin cevabını konsola yazdırır
+                console.log(data.statusText);
                 alert("Başarıyla kayıt oldunuz.");
-                registerButton.disabled = true;
+                window.location.href = "../Login/login.html"
             })
             .catch((error) => {
+                alert("An error occured, please try again.")
                 console.error("Bir hata oluştu:", error);
             });
     }

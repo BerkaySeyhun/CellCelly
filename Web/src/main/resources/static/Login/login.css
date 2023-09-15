@@ -1,16 +1,11 @@
 * {
     margin: 0;
     padding: 0;
-    /*box-sizing: border-box;*/
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
-    /*display: flex;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*margin: 0;*/
 }
 
 div.container {
@@ -21,15 +16,17 @@ div.container {
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .imagePart {
     display: flex;
     justify-content: center;
-    align-items: center; /* Center the content vertically */
+    align-items: center;
     height: 200px;
     border-radius: 20px;
     margin: 0 auto;
     padding: 0;
 }
+
 h1 {
     text-align: center;
     color: #428bde;
@@ -68,34 +65,27 @@ input[type="button"] {
 }
 
 
-.otherButtons{
-    margin: 0px auto; /* Add margin-top to move the container up */
-    display:flex;
+.otherButtons {
+    margin: 0 auto;
+    display: flex;
     flex-direction: column;
     text-align: center;
 
 }
-.otherButtons a{
-    background-color: #428bde;
-    /*display: block;*/
-}
-.loginButton{
 
-    /*display:flex;*/
+.otherButtons a {
+    background-color: #428bde;
+}
+
+.loginButton {
     flex-direction: column;
     text-align: center;
     background-color: #0066cc;
 
 }
 
-span{
+span {
     color: red;
     display: none;
     font-size: 12px;
 }
-/*input[type="submit"]:hover {*/
-/*    background-color: #004c99;*/
-/*}*/
-/*input[type="submit"]:focus {*/
-/*    outline: none;*/
-/*}*/
